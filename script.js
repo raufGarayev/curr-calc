@@ -60,7 +60,7 @@ function valueChanged() {
                     inputs[i].parentElement.nextElementSibling.children[0].children[1].innerHTML = `${(usd/eur).toFixed(2)} ${inputs[i].id.toUpperCase()}`
                     break
                 case 'eur':
-                    inputs[i].parentElement.nextElementSibling.children[0].children[0].innerText = this.id.toUpperCase()
+                    inputs[i].parentElement.nextElementSibling.children[0].children[0].innerText = this.id.toUpperCase()    
                     inputs[i].parentElement.nextElementSibling.children[0].children[1].innerHTML = `1 ${inputs[i].id.toUpperCase()}`
             }
         }
