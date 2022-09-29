@@ -1,5 +1,29 @@
-const usd = 0.59
-const eur = 0.58
+/* const usd = 0.59
+const eur = 0.58 */
+async function getCur(cur) {
+    const url = "https://v6.exchangerate-api.com/v6/f97d27a4ce788c37f7845f5f/latest/AZN"
+    return await fetch(url)
+        .then(res => res.json())
+        .then(data => {
+
+            /* switch(cur) {
+                case 'usd':
+                    return data.conversion_rates.USD
+                case 'eur':
+                    return data.conversion_rates.EUR
+                case 'rub':
+                    return  data.conversion_rates.RUB
+            } */
+            if(cur === 'usd') return data.conversion_rates.USD;
+                
+            if(cur == 'eur') return data.conversion_rates.EUR;
+                
+            else return -1;
+                
+        })
+}
+
+console.log(getCur('usd'))
 
 const inputs = document.querySelectorAll('input')
 
@@ -12,12 +36,12 @@ function valueChanged() {
         for(let i=0;i<inputs.length;i++) {
             switch(inputs[i].id) {
                 case 'usd':
-                    inputs[i].value = (this.value * usd).toFixed(2)
+                    inputs[i].value = (this.value * Number(getCur('usd'))).toFixed(2)
                     inputs[i].parentElement.nextElementSibling.children[0].children[0].innerText = this.id.toUpperCase()
                     inputs[i].parentElement.nextElementSibling.children[0].children[1].innerHTML = `${usd} ${inputs[i].id.toUpperCase()}`
                     break
                 case 'eur':
-                    inputs[i].value = (this.value * eur).toFixed(2)
+                    inputs[i].value = (this.value * inputs[i].id).toFixed(2)
                     inputs[i].parentElement.nextElementSibling.children[0].children[0].innerText = this.id.toUpperCase()
                     inputs[i].parentElement.nextElementSibling.children[0].children[1].innerHTML = `${eur} ${inputs[i].id.toUpperCase()}`
                     break
